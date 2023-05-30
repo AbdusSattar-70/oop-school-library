@@ -1,4 +1,5 @@
-class Person
+require_relative 'nameable'
+class Person < Nameable
   attr_reader :id
   attr_accessor :name, :age
 
@@ -23,5 +24,11 @@ class Person
     return true if of_age? || @parent_permission == true
 
     false
+  end
+
+  public
+
+  def corect_name
+    @name
   end
 end
