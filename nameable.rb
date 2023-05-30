@@ -1,5 +1,5 @@
 class Nameable
-  def corect_name
+  def correct_name
     raise NotImplementedError
   end
 end
