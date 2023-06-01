@@ -1,6 +1,7 @@
 require_relative 'book'
 require_relative 'student'
 require_relative 'teacher'
+require_relative 'rental'
 class App
   def initialize
     @books = []
@@ -53,7 +54,7 @@ class App
   def create_person
     number = nil
     until %w[1 2].include?(number)
-      puts 'Do you want to create a student(1) or a teacher(2)? [Input the number 1 or 2 only]: '
+      print 'Do you want to create a student(1) or a teacher(2)? [Input the number 1 or 2 only]: '
       number = gets.chomp
     end
 
@@ -68,8 +69,37 @@ class App
   def list_all_people
     @people.each { |person| puts "ID: #{person.id} Name: #{person.name} Age: #{person.age}" }
   end
-end
 
-dis = App.new
-dis.create_person
-dis.list_all_people
+  def create_rental
+    puts 'Select a book from the following list by number'
+    @books.each_with_index do |book, i|
+      puts "#{i} Title = #{book.title} Author = #{book.author}"
+    end
+    book_index = gets.chomp.to_i
+    puts 'Select a person from the following list by number(not ID)'
+    @people.each.with_index do |person, index|
+      puts "#{index}) #{[person.class.name]} Name #{person.name}, ID #{person.id}, Age #{person.age}"
+    end
+    person_index = gets.chomp.to_i
+    puts 'Date(YYYY-MM-DD):'
+    date = gets.chomp
+    Rental.new(date, @people[person_index], @books[book_index])
+    puts 'Created the Rental successfully!'
+  end
+
+  def list_all_rentals
+    print 'ID of a person: '
+    id = gets.chomp.to_i
+
+    person_rental = @people.find { |person| person.id == id }
+
+    if person_rental
+      puts 'Rentals:'
+      person_rental.rentals.each do |rental|
+        puts "Date: #{rental.date}, Book: #{rental.book.title} by #{rental.book.author}"
+      end
+    else
+      puts 'Person not found!'
+    end
+  end
+end
