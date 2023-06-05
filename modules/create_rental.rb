@@ -18,4 +18,3 @@ module CreateRental
     puts 'Created the Rental successfully!'
   end
 end
-
