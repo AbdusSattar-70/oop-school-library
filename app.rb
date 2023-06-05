@@ -2,10 +2,12 @@ require_relative 'book'
 require_relative 'rental'
 require_relative 'modules/create_person'
 require_relative 'modules/create_book'
+require_relative 'modules/create_rental'
 
 class App
   include CreatePerson
   include CreateBook
+  include CreateRental
   def initialize
     @books = []
     @people = []
@@ -27,22 +29,6 @@ class App
     end
   end
 
-  def create_rental
-    puts 'Select a book from the following list by number'
-    @books.each_with_index do |book, i|
-      puts "#{i} Title = #{book.title} Author = #{book.author}"
-    end
-    book_index = gets.chomp.to_i
-    puts 'Select a person from the following list by number(not ID)'
-    @people.each.with_index do |person, index|
-      puts "#{index}) #{[person.class.name]} Name #{person.name}, ID #{person.id}, Age #{person.age}"
-    end
-    person_index = gets.chomp.to_i
-    puts 'Date(YYYY-MM-DD):'
-    date = gets.chomp
-    Rental.new(date, @people[person_index], @books[book_index])
-    puts 'Created the Rental successfully!'
-  end
 
   def list_all_rentals
     if @people.empty?
