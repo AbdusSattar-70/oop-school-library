@@ -5,7 +5,6 @@ require_relative 'modules/list_all_books'
 require_relative 'modules/list_all_people'
 require_relative 'modules/list_all_rentals'
 
-
 class App
   include CreatePerson
   include CreateBook
