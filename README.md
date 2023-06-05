@@ -125,6 +125,12 @@ ruby filename.rb
 - Twitter: [Abdus Sattar](https://twitter.com/Abdus_Sattar70)
 - LinkedIn: [Abdus Sattar](https://www.linkedin.com/in/abdus-sattar70/)
 
+## <a> 👤 Tshobohwa Salomon </a>
+
+- GitHub: [Tshobohwa](https://github.com/Tshobohwa)
+- Twitter: [@SalomonTshoboh1](https://twitter.com/SalomonTshoboh1)
+- LinkedIn: [Tshobohwa Salomon](https://www.linkedin.com/in/tshobohwasalomon/)
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- FUTURE FEATURES -->
