@@ -1,5 +1,5 @@
 require_relative 'app'
-
+require_relative 'modules/options'
 OPTIONS = {
   1 => :list_all_books,
   2 => :list_all_people,
@@ -10,29 +10,14 @@ OPTIONS = {
   7 => :exit
 }.freeze
 
-MENU_OPTIONS = [
-  'List all books',
-  'List all people',
-  'Create a person',
-  'Create a book',
-  'Create a rental',
-  'List all rentals for a given person ID',
-  'Exit'
-].freeze
-
-def display_option
-  puts 'Please choose an option by entering a number:'
-  MENU_OPTIONS.each_with_index { |option, index| puts "#{index + 1} - #{option}" }
-end
-
-def app_start(app)
+def app_start(manage_option)
   loop do
-    display_option
+    manage_option.display_option
     user_input = gets.chomp.to_i
 
     if OPTIONS.key?(user_input)
       run = OPTIONS[user_input]
-      app.send(run)
+      manage_option.send(run)
       break if run == :exit
     else
       puts 'Enter the correct option: '
@@ -42,8 +27,8 @@ end
 
 def main
   app = App.new
+  manage_option = ManageOptions.new(app)
   puts 'Welcome to the School Library App!'
-  app_start(app)
+  app_start(manage_option)
 end
-
 main
