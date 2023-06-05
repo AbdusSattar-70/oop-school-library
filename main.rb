@@ -1,7 +1,9 @@
-require_relative 'modules/options.rb'
+require_relative 'modules/options'
+require_relative 'modules/create_person'
 require_relative 'app'
 class Main
   include DisplayOption
+  include CreatePerson
   def initialize
     main
   end
