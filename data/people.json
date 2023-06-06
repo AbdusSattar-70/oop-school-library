@@ -1,3 +1,15 @@
 [
-
+  {
+    "type": "student",
+    "age": 23,
+    "classroom": null,
+    "name": "Sattar",
+    "parent_permission": {
+      "parent_permission": {
+        "parent_permission": {
+          "parent_permission": "Y"
+        }
+      }
+    }
+  }
 ]
