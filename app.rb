@@ -44,19 +44,13 @@ class App
   end
 
   def get_data_from_files(file)
-  begin
     json_data = File.read(file)
     parsed_data = JSON.parse(json_data)
     convert_to_objects(parsed_data)
   rescue Errno::ENOENT
     # File not found error
     []
-  rescue JSON::ParserError
-    # Invalid JSON format error
-    []
   end
-end
-
 
   def convert_to_objects(parsed_data)
     parsed_data.map do |data|
