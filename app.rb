@@ -1,15 +1,15 @@
+require 'json'
 require_relative 'student'
 require_relative 'teacher'
 require_relative 'book'
 require_relative 'rental'
 
 class App
-  attr_reader :books, :people
+  attr_accessor :books, :people
 
   def initialize
     @books = []
     @people = []
-  end
   end
 
   def create_book(title, author)
@@ -41,5 +41,18 @@ class App
 
   def list_all_rentals(id)
     @people.find { |person| person.id == id }
+  end
+
+  def get_data_from_files(file)
+    json_data = File.read(file)
+    begin
+      JSON.parse(json_data)
+    rescue JSON::ParserError
+      []
+    end
+  end
+
+  def store_data_in_files(file, data)
+    File.write(file, JSON.generate(data))
   end
 end
