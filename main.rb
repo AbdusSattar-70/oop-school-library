@@ -10,15 +10,20 @@ OPTIONS = {
   7 => :exit
 }.freeze
 
-def app_start(manage_option)
+def app_start(manage_option, app)
   loop do
     manage_option.display_option
     user_input = gets.chomp.to_i
 
     if OPTIONS.key?(user_input)
       run = OPTIONS[user_input]
+      if run == :exit
+        puts 'Exit'
+        app.store_data_in_files('data/people.json', app.people)
+        app.store_data_in_files('data/books.json', app.books)
+        break
+      end
       manage_option.send(run)
-      break if run == :exit
     else
       puts 'Enter the correct option: '
     end
@@ -27,8 +32,10 @@ end
 
 def main
   app = App.new
+  app.books = app.get_data_from_files('data/books.json')
+  app.people = app.get_data_from_files('data/people.json')
   manage_option = ManageOptions.new(app)
   puts 'Welcome to the School Library App!'
-  app_start(manage_option)
+  app_start(manage_option, app)
 end
 main
