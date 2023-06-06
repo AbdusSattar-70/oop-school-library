@@ -10,6 +10,7 @@ class App
     @books = []
     @people = []
   end
+  end
 
   def create_book(title, author)
     book = Book.new(title, author)
