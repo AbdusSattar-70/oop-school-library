@@ -46,13 +46,42 @@ class App
   def get_data_from_files(file)
     json_data = File.read(file)
     begin
-      JSON.parse(json_data)
+      parsed_data = JSON.parse(json_data)
+      convert_to_objects(parsed_data)
     rescue JSON::ParserError
       []
     end
   end
 
+  def convert_to_objects(parsed_data)
+    parsed_data.map do |data|
+      case data['type']
+      when 'book'
+        Book.new(data['title'], data['author'])
+      when 'student'
+        Student.new(data['age'], data['classroom'], data['name'], parent_permission: data['parent_permission'])
+      when 'teacher'
+        Teacher.new(data['age'], data['specialization'], data['name'])
+      end
+    end
+  end
+
+  def convert_to_hashes(data)
+    data.map do |object|
+      case object
+      when Book
+        { 'type' => 'book', 'title' => object.title, 'author' => object.author }
+      when Student
+        { 'type' => 'student', 'age' => object.age, 'classroom' => object.classroom, 'name' => object.name,
+          'parent_permission' => object.parent_permission }
+      when Teacher
+        { 'type' => 'teacher', 'age' => object.age, 'specialization' => object.specialization, 'name' => object.name }
+      end
+    end
+  end
+
   def store_data_in_files(file, data)
-    File.write(file, JSON.generate(data))
+    serialized_data = JSON.pretty_generate(convert_to_hashes(data))
+    File.write(file, serialized_data)
   end
 end
