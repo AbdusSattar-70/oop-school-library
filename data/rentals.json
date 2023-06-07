@@ -1,0 +1,14 @@
+[
+  {
+    "type": "rental",
+    "date": "1000",
+    "person": 424,
+    "book": "War"
+  },
+  {
+    "type": "rental",
+    "date": "2000",
+    "person": 130,
+    "book": "Gh"
+  }
+]

@@ -103,20 +103,38 @@ class ManageOptions
     end
   end
 
-  def create_rental
+  def select_book
     puts 'Select a book from the following list by number'
     @app.books.each_with_index do |book, i|
       puts "#{i} Title = #{book.title} Author = #{book.author}"
     end
     book_index = gets.chomp.to_i
-    puts 'Select a person from the following list by number(not ID)'
+    while book_index.negative? || book_index >= @app.books.length
+      puts 'Invalid book index. Please select a valid book from the list:'
+      book_index = gets.chomp.to_i
+    end
+    book_index
+  end
+
+  def select_person
+    puts 'Select a person from the following list by number (not ID)'
     @app.people.each.with_index do |person, index|
-      puts "#{index}) #{[person.class.name]} Name #{person.name}, ID #{person.id}, Age #{person.age}"
+      puts "#{index}) #{person.class.name} Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
     end
     person_index = gets.chomp.to_i
-    puts 'Date(YYYY-MM-DD):'
+    while person_index.negative? || person_index >= @app.people.length
+      puts 'Invalid person index. Please select a valid person from the list:'
+      person_index = gets.chomp.to_i
+    end
+    person_index
+  end
+
+  def create_rental
+    book_index = select_book
+    person_index = select_person
+    puts 'Date (YYYY-MM-DD):'
     date = gets.chomp
-    @app.create_rental(date, @app.people[person_index], @app.books[book_index])
+    @app.create_rental(date, person_index, book_index)
     puts 'Created the Rental successfully!'
   end
 end
