@@ -25,5 +25,25 @@
       "parent_permission": "Y"
     },
     "id": 130
+  },
+  {
+    "type": "student",
+    "age": 25,
+    "classroom": "BT",
+    "name": "Salomon",
+    "parent_permission": {
+      "parent_permission": "N"
+    },
+    "id": 250
+  },
+  {
+    "type": "student",
+    "age": 56,
+    "classroom": "HB",
+    "name": "Roky",
+    "parent_permission": {
+      "parent_permission": "Y"
+    },
+    "id": 436
   }
 ]
