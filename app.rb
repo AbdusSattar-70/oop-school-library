@@ -36,18 +36,17 @@ class App
     @people.each { |person| puts "ID: #{person.id} Name: #{person.name} Age: #{person.age}" }
   end
 
- def create_rental(date, person_index, book_index)
-  selected_person = @people[person_index]
-  selected_book = @books[book_index]
+  def create_rental(date, person_index, book_index)
+    selected_person = @people[person_index]
+    selected_book = @books[book_index]
 
-  if selected_person && selected_book
-    rental = Rental.new(date, selected_person, selected_book)
-    @rentals << rental
-    puts 'Created the Rental successfully!'
-  else
-    puts 'Invalid person index or book index.'
+    if selected_person && selected_book
+      rental = Rental.new(date, selected_person, selected_book)
+      @rentals << rental
+    else
+      puts 'Invalid person index or book index.'
+    end
   end
-end
 
   def list_all_rentals(id)
     @people.find { |person| person.id == id }
@@ -62,47 +61,42 @@ end
     []
   end
 
- def convert_to_objects(parsed_data)
-  parsed_data.map do |data|
-    case data['type']
-    when 'book'
-      Book.new(data['title'], data['author'])
-    when 'student'
-      Student.new(data['age'], data['classroom'], data['name'], data['parent_permission'], data['id'])
-    when 'teacher'
-      Teacher.new(data['age'], data['specialization'], data['name'], data['id'])
-    when 'rental'
-      person_id = data['person_id']
-      book_title = data['book_title']
-      book_author = data['book_author']
-      person = @people.find { |p| p.id == person_id }
-      book = @books.find { |b| b.title == book_title && b.author == book_author }
-      if person && book
-        rental = Rental.new(data['date'], person, book)
-        person.add_rental(rental)
-        rental
-      else
-        nil
+  def convert_to_objects(parsed_data)
+    parsed_data.map do |data|
+      case data['type']
+      when 'book'
+        Book.new(data['title'], data['author'])
+      when 'student'
+        Student.new(data['age'], data['classroom'], data['name'], data['parent_permission'], data['id'])
+      when 'teacher'
+        Teacher.new(data['age'], data['specialization'], data['name'], data['id'])
+      when 'rental'
+        person_id = data['person']
+        book_title = data['book']
+        date = data['date']
+        person = @people.find { |p| p.id == person_id }
+        book = @books.find { |b| b.title == book_title }
+        rental = Rental.new(date, person, book)
       end
-    end
-  end.compact
-end
+    end.compact
+  end
 
   def convert_to_hashes(data)
-  data.map do |object|
-    case object
-    when Book
-      { 'type' => 'book', 'title' => object.title, 'author' => object.author }
-    when Student
-      { 'type' => 'student', 'age' => object.age, 'classroom' => object.classroom, 'name' => object.name,
-        'parent_permission' => object.parent_permission }
-    when Teacher
-      { 'type' => 'teacher', 'age' => object.age, 'specialization' => object.specialization, 'name' => object.name }
-    when Rental
-      { 'type' => 'rental', 'date' => object.date, 'person' => object.person.id, 'book' => object.book.title }
+    data.map do |object|
+      case object
+      when Book
+        { 'type' => 'book', 'title' => object.title, 'author' => object.author }
+      when Student
+        { 'type' => 'student', 'age' => object.age, 'classroom' => object.classroom, 'name' => object.name,
+          'parent_permission' => object.parent_permission, 'id' => object.id }
+      when Teacher
+        { 'type' => 'teacher', 'age' => object.age, 'specialization' => object.specialization, 'name' => object.name,
+          'id' => object.id }
+      when Rental
+        { 'type' => 'rental', 'date' => object.date, 'person' => object.person.id, 'book' => object.book.title }
+      end
     end
   end
-end
 
   def store_data_in_files(file, data)
     serialized_data = JSON.pretty_generate(convert_to_hashes(data))
