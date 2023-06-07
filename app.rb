@@ -61,6 +61,14 @@ class App
     []
   end
 
+  def find_book(book_title)
+    @books.find { |b| b.title == book_title }
+  end
+
+  def find_person(person_id)
+    @people.find { |p| p.id == person_id }
+  end
+
   def convert_to_objects(parsed_data)
     parsed_data.map do |data|
       case data['type']
@@ -74,8 +82,8 @@ class App
         person_id = data['person']
         book_title = data['book']
         date = data['date']
-        person = @people.find { |p| p.id == person_id }
-        book = @books.find { |b| b.title == book_title }
+        person = find_person(person_id)
+        book = find_book(book_title)
         Rental.new(date, person, book)
       end
     end.compact
