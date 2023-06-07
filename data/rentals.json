@@ -10,5 +10,11 @@
     "date": "2000",
     "person": 130,
     "book": "Gh"
+  },
+  {
+    "type": "rental",
+    "date": "15-12-05",
+    "person": 250,
+    "book": "Gh"
   }
 ]

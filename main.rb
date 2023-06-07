@@ -1,5 +1,5 @@
-require_relative 'app'
-require_relative 'modules/options'
+require_relative 'classes/app'
+require_relative 'classes/options'
 OPTIONS = {
   1 => :list_all_books,
   2 => :list_all_people,
