@@ -76,7 +76,7 @@ class App
         date = data['date']
         person = @people.find { |p| p.id == person_id }
         book = @books.find { |b| b.title == book_title }
-        rental = Rental.new(date, person, book)
+        Rental.new(date, person, book)
       end
     end.compact
   end

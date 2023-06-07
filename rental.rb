@@ -1,4 +1,4 @@
-require_relative "app"
+require_relative 'app'
 
 class Rental
   attr_accessor :date, :person, :book
