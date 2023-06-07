@@ -8,6 +8,5 @@ class Rental
     @person = person
     @book = book
     @person.add_rental(self, book)
-    @book.rented = true
   end
 end

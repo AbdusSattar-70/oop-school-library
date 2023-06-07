@@ -118,7 +118,7 @@ class ManageOptions
 
   def select_person
     puts 'Select a person from the following list by number (not ID)'
-    @app.people.each.with_index do |person, index|
+    @app.people.each_with_index do |person, index|
       puts "#{index}) #{person.class.name} Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
     end
     person_index = gets.chomp.to_i
