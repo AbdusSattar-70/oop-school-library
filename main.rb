@@ -18,9 +18,9 @@ def app_start(manage_option, app)
     if OPTIONS.key?(user_input)
       run = OPTIONS[user_input]
       if run == :exit
-        puts 'Exit'
         app.store_data_in_files('data/people.json', app.people)
         app.store_data_in_files('data/books.json', app.books)
+        app.store_data_in_files('data/rentals.json', app.rentals)
         break
       end
       manage_option.send(run)
@@ -34,6 +34,7 @@ def main
   app = App.new
   app.books = app.get_data_from_files('data/books.json')
   app.people = app.get_data_from_files('data/people.json')
+  app.rentals = app.get_data_from_files('data/rentals.json')
   manage_option = ManageOptions.new(app)
   puts 'Welcome to the School Library App!'
   app_start(manage_option, app)

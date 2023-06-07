@@ -1,13 +1,17 @@
 [
   {
     "type": "student",
-    "age": 33,
-    "classroom": null,
-    "name": "Fdd",
+    "age": 25,
+    "classroom": "g",
+    "name": "Sattar",
     "parent_permission": {
-      "parent_permission": {
-        "parent_permission": "Y"
-      }
+      "parent_permission": "N"
     }
+  },
+  {
+    "type": "teacher",
+    "age": 56,
+    "specialization": "MIT",
+    "name": "forid"
   }
 ]
