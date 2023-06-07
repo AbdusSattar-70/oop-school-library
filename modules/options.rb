@@ -113,7 +113,6 @@ class ManageOptions
       puts 'Invalid book index. Please select a valid book from the list:'
       book_index = gets.chomp.to_i
     end
-
     puts 'Select a person from the following list by number (not ID)'
     @app.people.each.with_index do |person, index|
       puts "#{index}) #{person.class.name} Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
@@ -123,10 +122,8 @@ class ManageOptions
       puts 'Invalid person index. Please select a valid person from the list:'
       person_index = gets.chomp.to_i
     end
-
     puts 'Date (YYYY-MM-DD):'
     date = gets.chomp
-
     @app.create_rental(date, person_index, book_index)
     puts 'Created the Rental successfully!'
   end

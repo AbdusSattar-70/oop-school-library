@@ -9,8 +9,6 @@ class Book
     @rented = false
   end
 
-  attr_writer :rented
-
   def add_rental(rental)
     @rentals << rental
   end
